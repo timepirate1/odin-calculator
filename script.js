@@ -59,6 +59,17 @@ function operate(inputNumber1,inputNumber2,operator){
         
     }   
 
+
+   
+    // tackles rounding
+    if (!Number.isInteger(result)){
+        // toFixed returns a string
+        display.innerText = Number(result.toFixed(3));
+        console.log(result);
+        return result;
+    }
+
+
     display.innerText = result;
     console.log(result);
     return result;
