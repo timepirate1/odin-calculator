@@ -18,6 +18,15 @@ function divide(a,b){
     return  a/b;
 }
 
+function clearScreen(){
+    display.innerText= ' '; 
+    inputNumber1 = null;
+    inputNumber2 = null;
+    input = '';
+    operator = '';
+    equalsPressed = false;
+    console.log('i was called yes')
+}
 
 
 
@@ -38,8 +47,18 @@ function operate(inputNumber1,inputNumber2,operator){
         result = multiply(inputNumber1,inputNumber2);
     }   
     if (operator ==='/'){
-        result = divide(inputNumber1,inputNumber2);
+        if(inputNumber2===0){
+            clearScreen();
+            display.innerText = "Can't divide with 0, try again";
+            console.log('m called?')
+            return; // needed to stop function and not call the below display command to render result
+        }
+        else{
+           result = divide(inputNumber1,inputNumber2);
+        }
+        
     }   
+
     display.innerText = result;
     console.log(result);
     return result;
@@ -120,13 +139,7 @@ document.querySelector('#equal-btn').addEventListener('click',()=>{
 } );
 
 //clears the screen
-const clearScreen = document.querySelector('.clear-btn');
-clearScreen.addEventListener('click',()=>{
-    display.innerText= ' '; 
-    inputNumber1 = null;
-    inputNumber2 = null;
-    input = '';
-    operator = '';
-
+const clearButton = document.querySelector('.clear-btn');
+clearButton.addEventListener('click',()=>{
+   clearScreen();
 })
-
