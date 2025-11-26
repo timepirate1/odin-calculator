@@ -1,5 +1,5 @@
-let number1 = null;
-let number2 = null;
+let inputNumber1 = null;
+let inputNumber2 = null;
 let operator = '';
 let equalsPressed = false; 
 let equals = '';
@@ -26,19 +26,19 @@ const display =document.querySelector('.display');
 let input = '';
 
 //handles calculations
-function operate(number1,number2,operator){
+function operate(inputNumber1,inputNumber2,operator){
     let result = 0;
     if (operator ==='+'){
-        result = add(number1,number2);
+        result = add(inputNumber1,inputNumber2);
     }   
     if (operator ==='-'){
-        result = subtract(number1,number2);
+        result = subtract(inputNumber1,inputNumber2);
     }   
     if (operator ==='*'){
-        result = multiply(number1,number2);
+        result = multiply(inputNumber1,inputNumber2);
     }   
     if (operator ==='/'){
-        result = divide(number1,number2);
+        result = divide(inputNumber1,inputNumber2);
     }   
     display.innerText = result;
     console.log(result);
@@ -68,23 +68,23 @@ operationButtons.forEach(but=>{
     but.addEventListener('click',()=>{
         // stores input as number 1
       if( equalsPressed === true){
-        number1 = Number(equals);
+        inputNumber1 = Number(equals);
         equals = '';
         equalsPressed = false;
       }
       else{
-        if(number1 !== null) {
-            number1 = operations();
-            number2 = null;
+        if(inputNumber1 !== null) {
+            inputNumber1 = operations();
+            inputNumber2 = null;
         } 
         else{
-            number1 = Number(input);
+            inputNumber1 = Number(input);
         }
       }
       
        
     
-        console.log(number1);
+        console.log(inputNumber1);
         operator = but.textContent;
         console.log(operator);
         displayInput(but.textContent);
@@ -97,9 +97,9 @@ operationButtons.forEach(but=>{
 
 function operations (){
     // handles and operation calling
-            number2 = Number(input);
-            console.log(number2);
-            let answer = operate(number1,number2,operator);
+            inputNumber2 = Number(input);
+            console.log(inputNumber2);
+            let answer = operate(inputNumber1,inputNumber2,operator);
             input = '';
             console.log('hi im called');
             return answer;
@@ -109,8 +109,13 @@ function operations (){
 
 
 document.querySelector('#equal-btn').addEventListener('click',()=>{
-    equals = operations();
-    equalsPressed = true;
+    if(input === '' || inputNumber1 === null || operator === '' ){
+            //does nothing
+    }else{
+        equals = operations();
+        equalsPressed = true;
+    }
+
     
 } );
 
@@ -118,27 +123,10 @@ document.querySelector('#equal-btn').addEventListener('click',()=>{
 const clearScreen = document.querySelector('.clear-btn');
 clearScreen.addEventListener('click',()=>{
     display.innerText= ' '; 
-    number1 = null;
-    number2 = null;
+    inputNumber1 = null;
+    inputNumber2 = null;
     input = '';
     operator = '';
 
 })
 
-
-
-
-
-
-
-
-
-// note we do + before prompt to ensure the value is numeric and not taken as a string a
-// as that can conflict with the addition function and append instead of add the numbers
-
-// number1 = + prompt('enter first number'); 
-// operator = prompt('operation');
-// number2 = + prompt('enter 2nd number');
-
-
-//operate(number1,number2,operator)
