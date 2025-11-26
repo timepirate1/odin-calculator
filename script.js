@@ -1,9 +1,12 @@
 let number1 = null;
 let number2 = null;
 let operator = '';
+let equalsPressed = false; 
+let equals = '';
+
 
 function add(a,b){
-    return  Number(a)+Number(b);
+    return a+b;
 }
 function subtract(a,b){
     return  a-b;
@@ -20,7 +23,7 @@ function divide(a,b){
 
 //displays the input on screen
 const display =document.querySelector('.display');
-let input = null;
+let input = '';
 
 //handles calculations
 function operate(number1,number2,operator){
@@ -39,7 +42,7 @@ function operate(number1,number2,operator){
     }   
     display.innerText = result;
     console.log(result);
-    
+    return result;
 }
 
 
@@ -64,24 +67,52 @@ let operationButtons = document.querySelectorAll('.op-btn');
 operationButtons.forEach(but=>{
     but.addEventListener('click',()=>{
         // stores input as number 1
-        number1 = input;
+      if( equalsPressed === true){
+        number1 = Number(equals);
+        equals = '';
+        equalsPressed = false;
+      }
+      else{
+        if(number1 !== null) {
+            number1 = operations();
+            number2 = null;
+        } 
+        else{
+            number1 = Number(input);
+        }
+      }
+      
+       
+    
+        console.log(number1);
         operator = but.textContent;
         console.log(operator);
         displayInput(but.textContent);
         //resets input
-        input = null; 
-        console.log(number1);
-        // handles equal button and operation calling
-        document.querySelector('#equal-btn').addEventListener('click',()=>{
-            number2 = input;
-            console.log(number2);
-            operate(number1,number2,operator);
-            input = '';
-           })
+        input = ''; 
+        //operations();
     })
 });
 
 
+function operations (){
+    // handles and operation calling
+            number2 = Number(input);
+            console.log(number2);
+            let answer = operate(number1,number2,operator);
+            input = '';
+            console.log('hi im called');
+            return answer;
+           }
+
+
+
+
+document.querySelector('#equal-btn').addEventListener('click',()=>{
+    equals = operations();
+    equalsPressed = true;
+    
+} );
 
 //clears the screen
 const clearScreen = document.querySelector('.clear-btn');
@@ -89,7 +120,7 @@ clearScreen.addEventListener('click',()=>{
     display.innerText= ' '; 
     number1 = null;
     number2 = null;
-    input = null;
+    input = '';
     operator = '';
 
 })
