@@ -36,20 +36,25 @@ function operate(number1,number2,operator){
 
 
 
-
+const display =document.querySelector('.display');
 function displayInput(input){
-    const display =document.querySelector('.display');
+   
     display.innerText += input ;
 }
 
-let inputButtons = document.querySelector('.num-btn');
-inputButtons.array.forEach(button => {
+let inputButtons = document.querySelectorAll('.num-btn');
+inputButtons.forEach(button => {
     button.addEventListener('click', ()=>{
         const input = button.textContent;
         displayInput(input);
     })
 });
 
+
+const clearScreen = document.querySelector('.clear-btn');
+clearScreen.addEventListener('click',()=>{
+    display.innerText= ' ';
+})
 
 
 
