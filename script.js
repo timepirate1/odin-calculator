@@ -34,6 +34,31 @@ function operate(number1,number2,operator){
 
 
 
+
+
+
+function displayInput(input){
+    const display =document.querySelector('.display');
+    display.innerText += input ;
+}
+
+let inputButtons = document.querySelector('.num-btn');
+inputButtons.array.forEach(button => {
+    button.addEventListener('click', ()=>{
+        const input = button.textContent;
+        displayInput(input);
+    })
+});
+
+
+
+
+
+
+
+
+
+
 // note we do + before prompt to ensure the value is numeric and not taken as a string a
 // as that can conflict with the addition function and append instead of add the numbers
 

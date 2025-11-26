@@ -1,0 +1,59 @@
+.calculator{
+    display : flex;
+    flex-direction: column
+}
+
+.display{
+    background: lightgrey; 
+     height: 50px;
+     flex :1 1 auto;
+} 
+
+ .buttons{ 
+     height: 100px;
+     flex :1 1 auto;
+     display: flex;
+ }
+
+ .numbers{
+    background: grey;
+    flex-grow:2;
+    display: flex;
+    flex-direction: column;
+    flex-basis : 100px;
+    
+ }
+
+ .operators{
+    background: aquamarine;
+    flex-shrink: 0;
+    height: 100px;
+    flex-basis : 30px;
+    display : flex;
+    flex-direction: column;
+
+ }
+
+
+ .numbers .row{
+    /* flex-basis: 100px;
+    flex-grow: 2;
+    flex-shrink: 1; */
+    justify-content: space-between
+ }
+ .numbers button{
+    background: none;
+    border: none;
+ }
+
+ .numbers button:hover{
+    background: rgb(68, 68, 68);
+ }
+ .operators button{
+    background: none;
+    border: 18px white;
+
+ }
+ .operators button:hover{
+    background: rgb(105, 218, 180);
+ }
