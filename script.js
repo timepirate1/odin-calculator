@@ -2,7 +2,7 @@ let inputNumber1 = null;
 let inputNumber2 = null;
 let operator = '';
 let equalsPressed = false; 
-let equals = '';
+let equals= '';
 
 
 function add(a,b){
@@ -25,13 +25,18 @@ function clearScreen(){
     input = '';
     operator = '';
     equalsPressed = false;
-    console.log('i was called yes')
 }
 
 
 
 //displays the input on screen
 const display =document.querySelector('.display');
+
+
+function updateDisplay(value){
+    display.innerText = value;
+
+}
 let input = '';
 
 //handles calculations
@@ -49,8 +54,7 @@ function operate(inputNumber1,inputNumber2,operator){
     if (operator ==='/'){
         if(inputNumber2===0){
             clearScreen();
-            display.innerText = "Can't divide with 0, try again";
-            console.log('m called?')
+            updateDisplay("Can't divide by 0, try again");
             return; // needed to stop function and not call the below display command to render result
         }
         else{
@@ -60,18 +64,9 @@ function operate(inputNumber1,inputNumber2,operator){
     }   
 
 
-   
-    // tackles rounding
-    if (!Number.isInteger(result)){
-        // toFixed returns a string
-        display.innerText = Number(result.toFixed(3));
-        console.log(result);
-        return result;
-    }
-
-
-    display.innerText = result;
-    console.log(result);
+   //handles rounding if number is not integer
+    let displayValue = Number.isInteger(result) ? result : Number(result.toFixed(3));
+    updateDisplay(displayValue);
     return result;
 }
 
@@ -113,10 +108,7 @@ operationButtons.forEach(but=>{
       }
       
        
-    
-        console.log(inputNumber1);
         operator = but.textContent;
-        console.log(operator);
         displayInput(but.textContent);
         //resets input
         input = ''; 
@@ -128,10 +120,8 @@ operationButtons.forEach(but=>{
 function operations (){
     // handles and operation calling
             inputNumber2 = Number(input);
-            console.log(inputNumber2);
             let answer = operate(inputNumber1,inputNumber2,operator);
             input = '';
-            console.log('hi im called');
             return answer;
            }
 
